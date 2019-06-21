@@ -5,6 +5,9 @@
 * **[Default.aspx.cs](./CS/SummaryDisplayMode/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/SummaryDisplayMode/Default.aspx.vb))**
 <!-- default file list end -->
 # ASPxPivotGrid - How to change the summary display mode
+<!-- run online -->
+**[[Run Online]](https://codecentral.devexpress.com/t590012/)**
+<!-- run online end -->
 
 
 <p>This example shows how to use different summary display modes. For instance, you can display differences between summaries in the current and previous cells, or the percentage of a column's or row's total.<br>Use the <strong>Summary Display Type</strong> combo box to choose the summary display mode.</p>
