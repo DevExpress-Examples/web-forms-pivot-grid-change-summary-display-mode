@@ -7,99 +7,92 @@
 ' </auto-generated>
 '------------------------------------------------------------------------------
 
-Namespace SummaryDisplayMode
+Option Strict On
+Option Explicit On
 
+Namespace SummaryDisplayMode
 
     Partial Public Class DefaultForm
 
-        ''' <summary>
-        ''' form1 control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+        '''<summary>
+        '''form1 control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
-        ''' <summary>
-        ''' rgSummaryDisplayTypeGroups control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected rgSummaryDisplayTypeGroups As Global.DevExpress.Web.ASPxRadioButtonList
+        '''<summary>
+        '''rgSummaryDisplayTypeGroups control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents rgSummaryDisplayTypeGroups As Global.DevExpress.Web.ASPxRadioButtonList
 
-        ''' <summary>
-        ''' ddlSummaryDisplayType control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected ddlSummaryDisplayType As Global.DevExpress.Web.ASPxComboBox
+        '''<summary>
+        '''ddlSummaryDisplayType control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents ddlSummaryDisplayType As Global.DevExpress.Web.ASPxComboBox
 
-        ''' <summary>
-        ''' cbHideEmptyVariationItems control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected cbHideEmptyVariationItems As Global.DevExpress.Web.ASPxCheckBox
+        '''<summary>
+        '''cbShowRawValues control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents cbShowRawValues As Global.DevExpress.Web.ASPxCheckBox
 
-        ''' <summary>
-        ''' cbShowRawValues control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected cbShowRawValues As Global.DevExpress.Web.ASPxCheckBox
+        '''<summary>
+        '''cbAllowCrossGroupVariation control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents cbAllowCrossGroupVariation As Global.DevExpress.Web.ASPxCheckBox
 
-        ''' <summary>
-        ''' cbAllowCrossGroupVariation control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected cbAllowCrossGroupVariation As Global.DevExpress.Web.ASPxCheckBox
+        '''<summary>
+        '''pivotGrid control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents pivotGrid As Global.DevExpress.Web.ASPxPivotGrid.ASPxPivotGrid
 
-        ''' <summary>
-        ''' pivotGrid control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected pivotGrid As Global.DevExpress.Web.ASPxPivotGrid.ASPxPivotGrid
+        '''<summary>
+        '''cachedSourceDataFieldName control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents cachedSourceDataFieldName As Global.System.Web.UI.HtmlControls.HtmlInputHidden
 
-        ''' <summary>
-        ''' cachedSourceDataFieldName control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected cachedSourceDataFieldName As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+        '''<summary>
+        '''ProductReportsDataSource control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents ProductReportsDataSource As Global.System.Web.UI.WebControls.SqlDataSource
 
-        ''' <summary>
-        ''' SalesPersonsDataSource control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected SalesPersonsDataSource As Global.System.Web.UI.WebControls.AccessDataSource
-
-        ''' <summary>
-        ''' ProductReportsDataSource control.
-        ''' </summary>
-        ''' <remarks>
-        ''' Auto-generated field.
-        ''' To modify move field declaration from designer file to code-behind file.
-        ''' </remarks>
-        Protected ProductReportsDataSource As Global.System.Web.UI.WebControls.AccessDataSource
+        '''<summary>
+        '''SalesPersonsDataSource control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents SalesPersonsDataSource As Global.System.Web.UI.WebControls.SqlDataSource
     End Class
 End Namespace

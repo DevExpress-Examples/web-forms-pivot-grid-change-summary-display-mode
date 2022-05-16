@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SummaryDisplayMode.DefaultForm" %>
 
-<%@ Register Assembly="DevExpress.Web.ASPxPivotGrid.v17.2, Version=17.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+<%@ Register Assembly="DevExpress.Web.ASPxPivotGrid.v22.1, Version=22.1.1.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxPivotGrid" TagPrefix="dx" %>
-<%@ Register Assembly="DevExpress.Web.v17.2, Version=17.2.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+<%@ Register Assembly="DevExpress.Web.v22.1, Version=22.1.1.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web" TagPrefix="dx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,7 +23,6 @@
                             <dx:ListEditItem Value="0" Text="Variation" Selected="True" />
                             <dx:ListEditItem Value="1" Text="Percentage" />
                             <dx:ListEditItem Value="2" Text="Rank" />
-                            <dx:ListEditItem Value="3" Text="Index" />
                         </Items>
                     </dx:ASPxRadioButtonList>
                 </td>
@@ -35,10 +34,6 @@
                 <td>
                     <dx:ASPxComboBox ID="ddlSummaryDisplayType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSummaryDisplayType_SelectedIndexChanged"
                         width="195" />
-                </td>
-                <td>
-                    <dx:ASPxCheckBox runat="server" ID="cbHideEmptyVariationItems" Text="Hide Empty Variation Items"
-                        AutoPostBack="True" OnCheckedChanged="cbHideEmptyVariationItems_CheckedChanged" />
                 </td>
             </tr>
             <tr>
@@ -56,14 +51,19 @@
         </table>
         <dx:ASPxPivotGrid ID="pivotGrid" runat="server" width="100%">
             <OptionsView ShowFilterHeaders="false" HorizontalScrollBarMode="Auto" />
-            <OptionsData DataProcessingEngine="LegacyOptimized" />
+            <OptionsData DataProcessingEngine="Optimized" />
             <OptionsFilter NativeCheckBoxes="False" />
         </dx:ASPxPivotGrid>
         <input runat="server" id="cachedSourceDataFieldName" type="hidden" enableviewstate="true" />
-        <asp:AccessDataSource ID="SalesPersonsDataSource" runat="server" DataFile="~/App_Data/nwind.mdb"
-            SelectCommand="SELECT * FROM [SalesPerson]"></asp:AccessDataSource>
-        <asp:AccessDataSource ID="ProductReportsDataSource" runat="server" DataFile="~/App_Data/nwind.mdb"
-            SelectCommand="SELECT * FROM [ProductReports]"></asp:AccessDataSource>
+         <asp:SqlDataSource ID="ProductReportsDataSource" runat="server"
+             ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
+             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
+             SelectCommand="SELECT * FROM [ProductReports]"></asp:SqlDataSource>
+         <asp:SqlDataSource ID="SalesPersonsDataSource" runat="server"
+             ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
+             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
+             SelectCommand="SELECT * FROM [SalesPerson]"></asp:SqlDataSource>
+
     </div>
     </form>
 </body>

@@ -2,6 +2,7 @@
 Imports System.Collections.Generic
 Imports DevExpress.Web.ASPxPivotGrid
 Imports DevExpress.Data.PivotGrid
+Imports DevExpress.XtraPivotGrid
 
 Namespace SummaryDisplayMode
     Partial Public Class DefaultForm
@@ -13,12 +14,12 @@ Namespace SummaryDisplayMode
             End If
         End Sub
         Private Const SummaryDisplayTypeDataFieldID As String = "summaryDisplayTypeDataField"
+        Private Const SourceDataFieldID As String = "sourceDataField"
 
         Private Enum SummaryDisplayTypeGroup
             Variation = 0
             Percentage = 1
             Rank = 2
-            Index = 3
         End Enum
 
         Private ReadOnly Property SelectedGroup() As SummaryDisplayTypeGroup
@@ -55,7 +56,6 @@ Namespace SummaryDisplayMode
             ConfigurePivotGridLayout(SelectedGroup)
             Dim isVariation As Boolean = (SelectedGroup = SummaryDisplayTypeGroup.Variation)
             cbAllowCrossGroupVariation.Visible = isVariation
-            cbHideEmptyVariationItems.Visible = isVariation
             If SourceDataField IsNot Nothing Then
                 cbShowRawValues.Checked = SourceDataField.Visible
             End If
@@ -65,75 +65,55 @@ Namespace SummaryDisplayMode
             pivotGrid.BeginUpdate()
             Select Case typeGroup
                 Case SummaryDisplayTypeGroup.Variation
-                        pivotGrid.DataSourceID = "SalesPersonsDataSource"
-                        pivotGrid.Fields.Clear()
-                        Dim fieldYear As PivotGridField = pivotGrid.Fields.Add("OrderDate", DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
-                        fieldYear.GroupInterval = DevExpress.XtraPivotGrid.PivotGroupInterval.DateYear
-                        fieldYear.Caption = "Year"
-                        Dim fieldQuarter As PivotGridField = pivotGrid.Fields.Add("OrderDate", DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
-                        fieldQuarter.GroupInterval = DevExpress.XtraPivotGrid.PivotGroupInterval.DateQuarter
-                        fieldQuarter.ValueFormat.FormatString = "Qtr {0}"
-                        fieldQuarter.ValueFormat.FormatType = DevExpress.Utils.FormatType.Custom
-                        fieldQuarter.Caption = "Quarter"
-                        pivotGrid.Fields.Add("Sales Person", DevExpress.XtraPivotGrid.PivotArea.RowArea)
-
-                        Dim sourceDataField_Renamed As PivotGridField = pivotGrid.Fields.Add("OrderID", DevExpress.XtraPivotGrid.PivotArea.DataArea)
-                        sourceDataField_Renamed.SummaryType = PivotSummaryType.Count
-                        sourceDataField_Renamed.Caption = "Order Count"
-                        SourceDataFieldName = sourceDataField_Renamed.FieldName
-
-                        Dim summaryDisplayTypeDataField_Renamed As PivotGridField = pivotGrid.Fields.Add(SourceDataFieldName, DevExpress.XtraPivotGrid.PivotArea.DataArea)
-                        summaryDisplayTypeDataField_Renamed.SummaryType = sourceDataField_Renamed.SummaryType
-                        summaryDisplayTypeDataField_Renamed.ID = SummaryDisplayTypeDataFieldID
+                    pivotGrid.DataSourceID = "SalesPersonsDataSource"
+                    pivotGrid.Fields.Clear()
+                    Dim fieldYear As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("OrderDate", PivotArea.ColumnArea, PivotGroupInterval.DateYear)
+                    fieldYear.Caption = "Year"
+                    Dim fieldQuarter As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("OrderDate", PivotArea.ColumnArea, PivotGroupInterval.DateQuarter)
+                    fieldQuarter.ValueFormat.FormatString = "Qtr {0}"
+                    fieldQuarter.ValueFormat.FormatType = DevExpress.Utils.FormatType.Custom
+                    fieldQuarter.Caption = "Quarter"
+                    Dim salesPersonField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("Sales Person", PivotArea.RowArea)
+                    SourceDataFieldName = "OrderID"
+                    Dim sourceDataField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn(SourceDataFieldName, PivotArea.DataArea)
+                    sourceDataField.SummaryType = PivotSummaryType.Count
+                    sourceDataField.Caption = "Order Count"
+                    sourceDataField.ID = SourceDataFieldID
+                    Dim summaryDisplayTypeDataField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn(SourceDataFieldName, PivotArea.DataArea)
+                    summaryDisplayTypeDataField.SummaryType = sourceDataField.SummaryType
+                    summaryDisplayTypeDataField.ID = SummaryDisplayTypeDataFieldID
                 Case SummaryDisplayTypeGroup.Percentage
-                        pivotGrid.DataSourceID = "ProductReportsDataSource"
-                        pivotGrid.Fields.Clear()
-                        Dim fieldYear As PivotGridField = pivotGrid.Fields.Add("ShippedDate", DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
-                        fieldYear.GroupInterval = DevExpress.XtraPivotGrid.PivotGroupInterval.DateYear
-                        fieldYear.Caption = "Year"
-                        Dim fieldMonth As PivotGridField = pivotGrid.Fields.Add("ShippedDate", DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
-                        fieldMonth.GroupInterval = DevExpress.XtraPivotGrid.PivotGroupInterval.DateMonth
-                        fieldMonth.Caption = "Month"
-                        pivotGrid.Fields.Add("CategoryName", DevExpress.XtraPivotGrid.PivotArea.RowArea)
-                        pivotGrid.Fields.Add("ProductName", DevExpress.XtraPivotGrid.PivotArea.RowArea)
-
-                        Dim sourceDataField_Renamed As PivotGridField = pivotGrid.Fields.Add("ProductSales", DevExpress.XtraPivotGrid.PivotArea.DataArea)
-                        SourceDataFieldName = sourceDataField_Renamed.FieldName
-
-                        Dim summaryDisplayTypeDataField_Renamed As PivotGridField = pivotGrid.Fields.Add(SourceDataFieldName, DevExpress.XtraPivotGrid.PivotArea.DataArea)
-                        summaryDisplayTypeDataField_Renamed.ID = SummaryDisplayTypeDataFieldID
+                    pivotGrid.DataSourceID = "ProductReportsDataSource"
+                    pivotGrid.Fields.Clear()
+                    Dim fieldYear As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("ShippedDate", PivotArea.ColumnArea, PivotGroupInterval.DateYear)
+                    fieldYear.Caption = "Year"
+                    Dim fieldMonth As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("ShippedDate", PivotArea.ColumnArea, PivotGroupInterval.DateMonth)
+                    fieldMonth.Caption = "Month"
+                    Dim categoryNameField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("CategoryName", PivotArea.RowArea)
+                    Dim productNameField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("ProductName", PivotArea.RowArea)
+                    SourceDataFieldName = "ProductSales"
+                    Dim sourceDataField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn(SourceDataFieldName, PivotArea.DataArea)
+                    sourceDataField.ID = SourceDataFieldID
+                    Dim summaryDisplayTypeDataField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn(SourceDataFieldName, PivotArea.DataArea)
+                    summaryDisplayTypeDataField.ID = SummaryDisplayTypeDataFieldID
                 Case SummaryDisplayTypeGroup.Rank
-                        pivotGrid.DataSourceID = "SalesPersonsDataSource"
-                        pivotGrid.Fields.Clear()
-                        Dim fieldYear As PivotGridField = pivotGrid.Fields.Add("OrderDate", DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
-                        fieldYear.GroupInterval = DevExpress.XtraPivotGrid.PivotGroupInterval.DateYear
-                        fieldYear.Caption = "Year"
-                        Dim fieldQuarter As PivotGridField = pivotGrid.Fields.Add("OrderDate", DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
-                        fieldQuarter.GroupInterval = DevExpress.XtraPivotGrid.PivotGroupInterval.DateQuarter
-                        fieldQuarter.ValueFormat.FormatString = "Qtr {0}"
-                        fieldQuarter.ValueFormat.FormatType = DevExpress.Utils.FormatType.Custom
-                        fieldQuarter.Caption = "Quarter"
-                        pivotGrid.Fields.Add("Country", DevExpress.XtraPivotGrid.PivotArea.RowArea)
-                        pivotGrid.Fields.Add("Sales Person", DevExpress.XtraPivotGrid.PivotArea.RowArea)
+                    pivotGrid.DataSourceID = "SalesPersonsDataSource"
+                    pivotGrid.Fields.Clear()
+                    Dim fieldYear As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("OrderDate", PivotArea.ColumnArea, PivotGroupInterval.DateYear)
+                    fieldYear.Caption = "Year"
+                    Dim fieldQuarter As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("OrderDate", PivotArea.ColumnArea, PivotGroupInterval.DateQuarter)
+                    fieldQuarter.ValueFormat.FormatString = "Qtr {0}"
+                    fieldQuarter.ValueFormat.FormatType = DevExpress.Utils.FormatType.Custom
+                    fieldQuarter.Caption = "Quarter"
+                    Dim countryField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("Country", PivotArea.RowArea)
+                    Dim salesPersonField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn("Sales Person", PivotArea.RowArea)
+                    SourceDataFieldName = "Extended Price"
+                    Dim sourceDataField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn(SourceDataFieldName, PivotArea.DataArea)
+                    sourceDataField.Caption = "Sales"
+                    sourceDataField.ID = SourceDataFieldID
+                    Dim summaryDisplayTypeDataField As PivotGridField = pivotGrid.Fields.AddDataSourceColumn(SourceDataFieldName, PivotArea.DataArea)
+                    summaryDisplayTypeDataField.ID = SummaryDisplayTypeDataFieldID
 
-                        Dim sourceDataField_Renamed As PivotGridField = pivotGrid.Fields.Add("Extended_Price", DevExpress.XtraPivotGrid.PivotArea.DataArea)
-                        sourceDataField_Renamed.Caption = "Sales"
-                        SourceDataFieldName = sourceDataField_Renamed.FieldName
-
-                        Dim summaryDisplayTypeDataField_Renamed As PivotGridField = pivotGrid.Fields.Add(SourceDataFieldName, DevExpress.XtraPivotGrid.PivotArea.DataArea)
-                        summaryDisplayTypeDataField_Renamed.ID = SummaryDisplayTypeDataFieldID
-                Case SummaryDisplayTypeGroup.Index
-                        pivotGrid.DataSourceID = "SalesPersonsDataSource"
-                        pivotGrid.Fields.Clear()
-                        Dim fieldYear As PivotGridField = pivotGrid.Fields.Add("Country", DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
-                        pivotGrid.Fields.Add("CategoryName", DevExpress.XtraPivotGrid.PivotArea.RowArea)
-
-                        Dim sourceDataField_Renamed As PivotGridField = pivotGrid.Fields.Add("Extended_Price", DevExpress.XtraPivotGrid.PivotArea.DataArea)
-                        sourceDataField_Renamed.Caption = "Sales"
-                        SourceDataFieldName = sourceDataField_Renamed.FieldName
-
-                        Dim summaryDisplayTypeDataField_Renamed As PivotGridField = pivotGrid.Fields.Add(SourceDataFieldName, DevExpress.XtraPivotGrid.PivotArea.DataArea)
-                        summaryDisplayTypeDataField_Renamed.ID = SummaryDisplayTypeDataFieldID
             End Select
             pivotGrid.EndUpdate()
             pivotGrid.DataBind()
@@ -155,8 +135,7 @@ Namespace SummaryDisplayMode
                     types.Add(PivotSummaryDisplayType.RankInColumnSmallestToLargest)
                     types.Add(PivotSummaryDisplayType.RankInRowLargestToSmallest)
                     types.Add(PivotSummaryDisplayType.RankInRowSmallestToLargest)
-                Case SummaryDisplayTypeGroup.Index
-                    types.Add(PivotSummaryDisplayType.Index)
+
             End Select
             ddlSummaryDisplayType.Items.Clear()
             For Each type As PivotSummaryDisplayType In types
@@ -172,11 +151,6 @@ Namespace SummaryDisplayMode
                 End If
             End If
         End Sub
-        Protected Sub cbHideEmptyVariationItems_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs)
-            If SummaryDisplayTypeDataField IsNot Nothing Then
-                SummaryDisplayTypeDataField.Options.HideEmptyVariationItems = cbHideEmptyVariationItems.Checked
-            End If
-        End Sub
         Protected Sub cbAllowCrossGroupVariation_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs)
             pivotGrid.OptionsData.AllowCrossGroupVariation = cbAllowCrossGroupVariation.Checked
         End Sub
@@ -187,8 +161,55 @@ Namespace SummaryDisplayMode
             If SummaryDisplayTypeDataField Is Nothing Then
                 Return
             End If
-            SummaryDisplayTypeDataField.SummaryDisplayType = DirectCast(System.Enum.Parse(GetType(PivotSummaryDisplayType), ddlSummaryDisplayType.SelectedItem.Text), PivotSummaryDisplayType)
-            SummaryDisplayTypeDataField.Caption = String.Format("{0}", SummaryDisplayTypeDataField.SummaryDisplayType)
+            Dim sourceBinding As New DataSourceColumnBinding(SourceDataFieldName)
+            Select Case ddlSummaryDisplayType.SelectedItem.Text
+                Case "AbsoluteVariation"
+                    SummaryDisplayTypeDataField.DataBinding = New DifferenceBinding(sourceBinding, CalculationPartitioningCriteria.RowValue, CalculationDirection.DownThenAcross, DifferenceTarget.Previous, DifferenceType.Absolute)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "n0"
+                Case "PercentVariation"
+                    SummaryDisplayTypeDataField.DataBinding = New DifferenceBinding(sourceBinding, CalculationPartitioningCriteria.RowValue, CalculationDirection.DownThenAcross, DifferenceTarget.Previous, DifferenceType.Percentage)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "p2"
+                Case "PercentOfColumn"
+                    SummaryDisplayTypeDataField.DataBinding = New PercentOfTotalBinding(sourceBinding, CalculationPartitioningCriteria.ColumnValueAndRowParentValue)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "p2"
+                Case "PercentOfRow"
+                    SummaryDisplayTypeDataField.DataBinding = New PercentOfTotalBinding(sourceBinding, CalculationPartitioningCriteria.RowValueAndColumnParentValue)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "p2"
+                Case "PercentOfColumnGrandTotal"
+                    SummaryDisplayTypeDataField.DataBinding = New PercentOfTotalBinding(sourceBinding, CalculationPartitioningCriteria.ColumnValue)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "p2"
+
+                Case "PercentOfRowGrandTotal"
+                    SummaryDisplayTypeDataField.DataBinding = New PercentOfTotalBinding(sourceBinding, CalculationPartitioningCriteria.RowValue)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "p2"
+                Case "PercentOfGrandTotal"
+                    SummaryDisplayTypeDataField.DataBinding = New PercentOfTotalBinding(sourceBinding, CalculationPartitioningCriteria.None)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "p2"
+                Case "RankInColumnLargestToSmallest"
+                    SummaryDisplayTypeDataField.DataBinding = New RankBinding(sourceBinding, CalculationPartitioningCriteria.ColumnValue, RankType.Dense, PivotSortOrder.Descending)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "n0"
+                Case "RankInColumnSmallestToLargest"
+                    SummaryDisplayTypeDataField.DataBinding = New RankBinding(sourceBinding, CalculationPartitioningCriteria.ColumnValue, RankType.Dense, PivotSortOrder.Ascending)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "n0"
+                Case "RankInRowLargestToSmallest"
+                    SummaryDisplayTypeDataField.DataBinding = New RankBinding(sourceBinding, CalculationPartitioningCriteria.RowValue, RankType.Dense, PivotSortOrder.Descending)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "n0"
+                Case "RankInRowSmallestToLargest"
+                    SummaryDisplayTypeDataField.DataBinding = New RankBinding(sourceBinding, CalculationPartitioningCriteria.ColumnValue, RankType.Dense, PivotSortOrder.Ascending)
+                    SummaryDisplayTypeDataField.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+                    SummaryDisplayTypeDataField.CellFormat.FormatString = "n0"
+            End Select
+            SummaryDisplayTypeDataField.Caption = String.Format("{0}", ddlSummaryDisplayType.SelectedItem.Text)
         End Sub
 
     End Class

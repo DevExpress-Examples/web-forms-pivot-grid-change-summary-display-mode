@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace SummaryDisplayMode {
-    
-    
+
+
     public partial class DefaultForm {
-        
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +20,7 @@ namespace SummaryDisplayMode {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// rgSummaryDisplayTypeGroups control.
         /// </summary>
@@ -29,7 +29,7 @@ namespace SummaryDisplayMode {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxRadioButtonList rgSummaryDisplayTypeGroups;
-        
+
         /// <summary>
         /// ddlSummaryDisplayType control.
         /// </summary>
@@ -38,16 +38,7 @@ namespace SummaryDisplayMode {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxComboBox ddlSummaryDisplayType;
-        
-        /// <summary>
-        /// cbHideEmptyVariationItems control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxCheckBox cbHideEmptyVariationItems;
-        
+
         /// <summary>
         /// cbShowRawValues control.
         /// </summary>
@@ -56,7 +47,7 @@ namespace SummaryDisplayMode {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxCheckBox cbShowRawValues;
-        
+
         /// <summary>
         /// cbAllowCrossGroupVariation control.
         /// </summary>
@@ -65,7 +56,7 @@ namespace SummaryDisplayMode {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxCheckBox cbAllowCrossGroupVariation;
-        
+
         /// <summary>
         /// pivotGrid control.
         /// </summary>
@@ -74,7 +65,7 @@ namespace SummaryDisplayMode {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxPivotGrid.ASPxPivotGrid pivotGrid;
-        
+
         /// <summary>
         /// cachedSourceDataFieldName control.
         /// </summary>
@@ -83,16 +74,7 @@ namespace SummaryDisplayMode {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden cachedSourceDataFieldName;
-        
-        /// <summary>
-        /// SalesPersonsDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.AccessDataSource SalesPersonsDataSource;
-        
+
         /// <summary>
         /// ProductReportsDataSource control.
         /// </summary>
@@ -100,6 +82,15 @@ namespace SummaryDisplayMode {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.AccessDataSource ProductReportsDataSource;
+        protected global::System.Web.UI.WebControls.SqlDataSource ProductReportsDataSource;
+
+        /// <summary>
+        /// SalesPersonsDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SalesPersonsDataSource;
     }
 }
