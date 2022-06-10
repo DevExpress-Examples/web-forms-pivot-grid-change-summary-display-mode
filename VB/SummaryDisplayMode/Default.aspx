@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="true" CodeBehind="Default.aspx.vb" Inherits="SummaryDisplayMode.DefaultForm" %>
 
-<%@ Register Assembly="DevExpress.Web.ASPxPivotGrid.v22.1, Version=22.1.1.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+<%@ Register Assembly="DevExpress.Web.ASPxPivotGrid.v22.1, Version=22.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxPivotGrid" TagPrefix="dx" %>
-<%@ Register Assembly="DevExpress.Web.v22.1, Version=22.1.1.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+<%@ Register Assembly="DevExpress.Web.v22.1, Version=22.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web" TagPrefix="dx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -34,10 +34,6 @@
                 <td>
                     <dx:ASPxComboBox ID="ddlSummaryDisplayType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSummaryDisplayType_SelectedIndexChanged"
                         width="195" />
-                </td>
-                <td>
-                    <dx:ASPxCheckBox runat="server" ID="cbHideEmptyVariationItems" Text="Hide Empty Variation Items"
-                        AutoPostBack="True" OnCheckedChanged="cbHideEmptyVariationItems_CheckedChanged" />
                 </td>
             </tr>
             <tr>
