@@ -24,6 +24,7 @@ The following classes are used in this example:
 ## Documentation
 
 - [Summary Display Modes](https://docs.devexpress.com/AspNet/7281/components/pivot-grid/data-shaping/aggregation/summaries/summary-display-modes)
+- [Window Calculations Overview](https://docs.devexpress.com/CoreLibraries/401364/devexpress-pivot-grid-core-library/advanced-analytics/window-calculations/window-calculations-overview)
 
 
 
