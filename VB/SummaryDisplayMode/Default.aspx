@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SummaryDisplayMode.DefaultForm" %>
+<%@ Page Language="VB" AutoEventWireup="true" CodeBehind="Default.aspx.vb" Inherits="SummaryDisplayMode.DefaultForm" %>
 
 <%@ Register Assembly="DevExpress.Web.ASPxPivotGrid.v22.1, Version=22.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxPivotGrid" TagPrefix="dx" %>
