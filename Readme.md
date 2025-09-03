@@ -10,7 +10,7 @@ This example shows how to use different summary display modes.
 
 ![Pivot Grid for Web Forms - Calculate Running Totals](images/pivot-grid-web-forms-change-summary-mode.png)
 
-Уou can display differences between summaries in the current and previous cells, or the percentage of a column's or row's total. Use the **Summary Display Type** combo box to choose the summary display mode. Use the [Data Binding API](https://docs.devexpress.com/CoreLibraries/401533/devexpress-pivot-grid-core-library/data-binding-api?v=22.1) to specify how summary values should be displayed within cells.
+Уou can display differences between summaries in the current and previous cells, or the percentage of a column's or row's total. Use the **Summary Display Type** combo box to choose the summary display mode. Use the [Data Binding API](https://docs.devexpress.com/CoreLibraries/401533/devexpress-pivot-grid-core-library/data-binding-api) to specify how summary values should be displayed within cells.
 
 The following classes are used in this example:
 
@@ -38,3 +38,4 @@ The following classes are used in this example:
 
 (you will be redirected to DevExpress.com to submit your response)
 <!-- feedback end -->
+
